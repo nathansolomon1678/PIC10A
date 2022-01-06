@@ -1,5 +1,7 @@
+// Import code for Input & Output streams (necessary for using std::cout)
 #include <iostream>
 
+// int main() is the only function that is called automatically
 int main() {
     std::cout << "Hello, world! My name is Nathan.\n"
               << "\n"
@@ -10,5 +12,6 @@ int main() {
               << " ~Bob Ross\n"
               << "\n"
               << "I like this because it reminds me that being sad isn't purely bad.\n";
+    // Return with status code zero to indicate that there were no errors
     return 0;
 }
