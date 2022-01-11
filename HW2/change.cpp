@@ -1,6 +1,8 @@
 #include <iostream>
 
 int main() {
+    // In this program, the variable cents and dollars refer to the true cost,
+    // not to be confused with cents_paid
     std::cout << "Enter true cost.\n";
     int dollars = 0;
     int cents   = 0;
@@ -15,6 +17,7 @@ int main() {
     cents = (cents + 2) / 5 * 5;
     cents += dollars * 100;
 
+    // Convert the true cost to a decimal number of dollars and print that
     std::cout << "In cash, the item costs: $" << static_cast<double>(cents) / 100 << ".\n";
     std::cout << "Enter payment details.\n";
     int cents_paid = 0;
@@ -57,6 +60,5 @@ int main() {
     std::cout << "Your change is: "
               << cents / 100 << " dollar(s) and "
               << cents % 100 << " cent(s). Have a nice day, eh!\n";
-
     return 0;
 }
