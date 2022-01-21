@@ -9,6 +9,10 @@ double square(double num) {
     return num * num;
 }
 
+// Throughout this program, T refers to the number of data points
+// We could just use 3, but this way the program is more general
+// (although the covariance and standard_deviation functions will
+// give a divide by zero error if T is 1)
 template<size_t T>
 double sum(std::array<double, T> nums) {
     double subtotal = 0.;
@@ -42,17 +46,19 @@ double standard_deviation(std::array<double, T> nums) {
 }
 
 int main() {
+    // Generally, assume the user is being nice -- that is, entering values according to instructions,
+    // making the precision a small non-negative integer, etc.
     std::array<double, 3> x, y = {0, 0, 0};
-    std::cout << "Enter your first x- and y- values separated by a space: ";
+    std::cout << "Enter your first x- and y-values separated by a space: ";
     std::cin >> x[0] >> y[0];
-    std::cout << "Enter your second x- and y- values separated by a space: ";
+    std::cout << "Enter your second x- and y-values separated by a space: ";
     std::cin >> x[1] >> y[1];
-    std::cout << "Enter your third x- and y- values separated by a space: ";
+    std::cout << "Enter your third x- and y-values separated by a space: ";
     std::cin >> x[2] >> y[2];
 
     std::string x_label = "", y_label = "";
     std::cout << "Enter your x-label: ";
-    // Clear buffer so that getline doesn't reread the \n from the last console input
+    // Clear input buffer so that std::getline doesn't reread the \n from the last console input
     std::cin.ignore();
     std::getline(std::cin, x_label);
     std::cout << "Enter your y-label: ";
@@ -63,15 +69,17 @@ int main() {
     std::cin >> precision;
     std::cout << std::fixed << std::setprecision(precision);
 
-    // Print table
+    // Print table header
     std::cout << x_label << '|' << y_label << '\n';
     std::cout << std::string(x_label.size() + 1 + y_label.size(), '-') << '\n';
+    // Now print table content (3 lines of data)
     for (int i = 0; i < 3; i++) {
-        std::cout << std::setw(x_label.size()) << x[i] << '|';
-        std::cout << y[i] << '\n';
+        std::cout << std::setw(x_label.size()) << x[i];
+        std::cout << '|' << y[i] << '\n';
     }
 
     // Calculate line of best fit (y=mx+b) and Pearson's correlation coefficient (r)
+    // These formulas are taken from https://www.stt.msu.edu/~xiaoyimi/STT200/Lecture5.pdf
     double m = covariance(x, y) / square(standard_deviation(x));
     double b = avg(y) - m * avg(x);
     double r = covariance(x, y) / standard_deviation(x) / standard_deviation(y);
