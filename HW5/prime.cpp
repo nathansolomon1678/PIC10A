@@ -24,6 +24,7 @@ std::vector<long> prime_factorization(long num) {
             num /= potential_divisor;
             potential_divisor = 2;
         } else {
+            // Continue incrementing the potential divisor until it finds a prime factor
             potential_divisor++;
         }
     }
@@ -32,16 +33,18 @@ std::vector<long> prime_factorization(long num) {
 
 void print_prime_factors(long num) {
     std::cout << num << ": ";
-    std::vector<long> factors = prime_factorization(num);
+    const std::vector<long> factors = prime_factorization(num);
 
     if (factors.size() == 0) {
+        // If there are not prime factors, then num is one (or it's an invalid input)
         std::cout << "unit!\n";
     } else if (factors.size() == 1) {
+        // Similarly, if there was exactly one prime factor, that's cuz num is prime
         std::cout << "prime!\n";
     } else {
         // Iterate through the list of factors, printing all of them separated by " x "
         // and end with "\n"
-        for (long i = 0; i < factors.size(); i++) {
+        for (size_t i = 0; i < factors.size(); i++) {
             if (i < factors.size() - 1) {
                 std::cout << factors[i] << " x ";
             } else {
