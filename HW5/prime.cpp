@@ -2,9 +2,9 @@
 #include <vector>
 #include <cmath>
 
-std::vector<long> prime_factorization(long num) {
+std::vector<long long> prime_factorization(long long num) {
     // Assume the input is positive
-    std::vector<long> prime_factors = {};
+    std::vector<long long> prime_factors = {};
     // Continue testing potential divisors to find prime factors until num is 1,
     // at which point all prime factors have been found.
     // num can be as large as 10 billion, but since we only need to test divisors up to
@@ -31,9 +31,9 @@ std::vector<long> prime_factorization(long num) {
     return prime_factors;
 }
 
-void print_prime_factors(long num) {
+void print_prime_factors(long long num) {
     std::cout << num << ": ";
-    const std::vector<long> factors = prime_factorization(num);
+    const std::vector<long long> factors = prime_factorization(num);
 
     if (factors.size() == 0) {
         // If there are not prime factors, then num is one (or it's an invalid input)
@@ -57,10 +57,10 @@ void print_prime_factors(long num) {
 int main() {
     std::cout << "Enter a range of numbers to factorize. "
               << "Enter lower bound and upper bound separated by a space: ";
-    long lower_bound, upper_bound;
+    long long lower_bound, upper_bound;
     std::cin >> lower_bound >> upper_bound;
 
-    for (long i = lower_bound; i <= upper_bound; i++) {
+    for (long long i = lower_bound; i <= upper_bound; i++) {
         print_prime_factors(i);
     }
 
