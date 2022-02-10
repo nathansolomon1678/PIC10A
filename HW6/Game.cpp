@@ -14,7 +14,9 @@ int main() {
     int total_score = 0;
     int upper_bound = 22;  // this is a given
 
-    for (int round_num = 1; round_num <= 3; round_num++) {
+    for (int round_num = 1; round_num <= 3; ++round_num) {
+        // Repeat the game for 3 rounds
+
         std::cout << '\n';
 
         // lower_bound should be a random integer between 17 and 22 (inclusive)
@@ -38,12 +40,12 @@ int main() {
 
             if (inRange(lower_bound, upper_bound, value_of_hand)) {
                 // User won this round
-                total_score++;
+                ++total_score;
                 std::cout << "You got 1 point.\n";
                 break;
             } else if (exceeds(upper_bound, value_of_hand)) {
                 // User lost this round
-                total_score--;
+                --total_score;
                 std::cout << "You got -1 points.\n";
                 break;
             } else {
