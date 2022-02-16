@@ -82,5 +82,31 @@ This function computes 2 to a given nonnegative integer power with the output as
 */
 std::string twoPower(size_t pow);
 
+/**
+Reverses the characters of the given string
 
-#endif
+@param str the string to be reversed
+@return the reversed string
+*/
+void reverseString(std::string& str);
+
+/**
+Converts a number in binary to base 10
+
+@param binary_string the number represented in binary, as an std::string
+@return the value in base 10, as an std::string
+*/
+std::string binaryToDecimal(const std::string& binary_string);
+
+/**
+Converts a number in base 10 to binary
+
+Note that it passes by value. That's because calculating the binary representation requires
+modifying a copy of the decimal representation.
+
+@param num the number represented in base 10, as an std::string
+@return the value of num but represented in binary, as an std::string
+*/
+std::string decimalToBinary(std::string num);
+
+#endif // _NUMBERS_

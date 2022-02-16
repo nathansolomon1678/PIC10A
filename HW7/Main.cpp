@@ -5,21 +5,6 @@
 #include "Numbers.h"
 
 int main() {
-
-	/* 1. Try getting this to work first: just uncomment the 3 lines below */
-
-	//std::string s("example");
-	//reverseString(s);
-	//std::cout << s << '\n';
-
-	/* 2. Trying getting this add function to work and make sure the 2 lines below work. */
-
-	// std::cout << add("3", "19", 10) << '\n';
-	// std::cout << add("1", "10", 2) << '\n';
-
-	/* 3. If the above work, write binaryToDecimal and try the block of code below up to but not including item 4.  */
-	
-	/*
 	// obtain two binary numbers to add and convert
 	std::cout << "Please enter two nonnegative binary integers: ";
 	std::string bin1, bin2;
@@ -39,11 +24,6 @@ int main() {
 	std::cout << "Their sum in binary is: " << binarySum  << '\n';
 	std::cout << "Their sum in decimal is: " << decimalSum << "\n\n";
 
-	*/
-
-	/* 4. Now write decimalToBinary and include the rest of the code */
-	
-	/*
 	// obtain two decimal numbers to add and convert
 	std::cout << "Now enter two nonnegative decimal integers: ";
 	std::string dec1, dec2;
@@ -62,8 +42,6 @@ int main() {
 	std::cout << "Your second number in binary is: " << dec2AsBinary  << '\n';
 	std::cout << "Their sum in decimal is: " << decimalSum  << '\n';
 	std::cout << "Their sum in binary is: " << binarySum  << '\n';
-
-	*/
 
 	return 0;
 }
