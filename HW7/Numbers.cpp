@@ -3,33 +3,31 @@
 #include <stdexcept>
 #include <string>
 
-// Pass subtrahend by value because we need to modify it during calculations
+// Pass subtrahend by value, because we need to modify it during calculations
 std::string subtract(const std::string& minuend, std::string subtrahend, unsigned char base) {	
-
 	// Pad left side of subtrahend so it has as many digits as minuend
 	if (subtrahend.size() < minuend.size()) {
 		subtrahend = std::string(minuend.size() - subtrahend.size(), '0') + subtrahend;
 	}
-	
-    // Step 1: convert subtrahend into its complement
+    // First, convert subtrahend into its complement
     // For example, if the base is 10 and subtrahend is "000254", turn it into "999745"
 	for (char& c : subtrahend) {
 		c = digitToChar(base - 1 - charToDigit(c));
 	}
-		
 	// Continuing that example, subtracting 000254 is equivalent to
     // adding 1, then adding 999745, then subtracting 1000000
     // In other words, add one, add complement of subtrahend, then remove the first digit
     // of the sum (which will at that point be 1)
 	subtrahend = add(subtrahend, "1", base);
 	std::string difference = add(minuend, subtrahend, base);
-
     // Remove the leading 1
     difference = difference.substr(1);
-    // Remove leading zeroes, making sure as we go that the string is never empty
+
+    // Remove leading zeroes next, making sure as we go that the string is never empty
     while (difference.size() > 0 && difference[0] == '0') {
         difference = difference.substr(1);
     }
+    // To avoid ugliness, return "0" instead of ""
     return difference.size() == 0 ? "0" : difference;
 }
 
@@ -81,12 +79,8 @@ std::string add(const std::string& first, const std::string& second, unsigned ch
     return backwards_sum;
 }
 
-char digitToChar(unsigned char u) {
-    return u + '0';
-}
-unsigned char charToDigit(char c) {
-    return c - '0';
-}
+char digitToChar(unsigned char u) { return u + '0'; }
+unsigned char charToDigit(char c) { return c - '0'; }
 
 std::string twoPower(size_t pow) {
     // Returns 2^pow represented in base 10
@@ -99,6 +93,7 @@ std::string twoPower(size_t pow) {
 
 std::string binaryToDecimal(const std::string& binary_string) {
     std::string result = "";
+    // For each digit in binary_string (starting from left), add corresponding place value to sum
     for (size_t index = 0; index < binary_string.size(); ++index) {
         std::string place_value = twoPower(binary_string.size() - index - 1);
         if (binary_string[index] == '1') {

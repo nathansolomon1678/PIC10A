@@ -1,8 +1,8 @@
 #ifndef _NUMBERS_
 #define _NUMBERS_
 
-#include<string>
-#include<cstddef>
+#include <string>
+#include <cstddef>
 
 /**
 This function takes a single character and returns an unsigned char for its value from 0-9
