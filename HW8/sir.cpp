@@ -1,5 +1,5 @@
 #include "sir.h"
-#include <cmath>
+#include <cmath>  // for exp function
 
 SIR::SIR(const double cm,
          const double cn,
@@ -40,6 +40,8 @@ double SIR::get_rn()   const { return recovered_normals;   }
 double SIR::get_rm()   const { return recovered_morons;    }
 
 void SIR::step(const double dt) {
+    // This whole function just uses the formulas given in assignement.pdf
+    // No need to use descriptive variables because I don't even know what these values represent
     const double psi = num_normals * daily_normal_contacts + num_morons * daily_moron_contacts;
     const double psi_m = num_morons * daily_moron_contacts / psi;
     const double exponent = risk_reduction_factor * (1. - psi_m) * infected_normals / (1. - proportion_of_morons)
@@ -47,7 +49,9 @@ void SIR::step(const double dt) {
     const double H_n = 1. - exp(-contagiousness * dt * daily_normal_contacts * exponent);
     const double H_m = 1. - exp(-contagiousness * dt * daily_moron_contacts * exponent);
     const double R = 1. - exp(-daily_recovery_probability * dt);
-
+    // Calculate how much to change each variable at the end of the iteration, but don't change
+    // change any member variables until all the deltas have been calculated, or else
+    // the earlier calculations will mess up the later ones
     const double d_sn = -H_n * susceptible_normals;
     const double d_sm = -H_m * susceptible_morons;
     const double d_in = H_n * susceptible_normals - R * infected_normals;
