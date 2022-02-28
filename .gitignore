@@ -3,3 +3,7 @@
 *.swp
 *.zip
 example_code
+
+# Doxygen files
+HW[0-9]/html
+HW[0-9]/latex

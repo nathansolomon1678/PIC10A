@@ -2,24 +2,40 @@
 #define SIR_H
 
 /**
- * @struct SIR simulator for an SIR infection model
+ * @struct SIR
+ * @brief Population simulator for an SIR (Susceptible --> Infected --> Recovered) infection model
  */
 struct SIR {
 public:
-    // Constructor
+    /**
+     * @param cm The average number of daily contacts per moron
+     * @param cn The average number of daily contacts per normal person
+     * @param P The number of people in the model
+     * @param f The proportion of people who are morons
+     * @param istar The proportion of people who are infected at time 0
+     * @param beta The probability of getting sick from one contact
+     * @param gamma The daily probability of recovering
+     * @param mu The risk reduction factor from wearing masks
+     */
     SIR(const double cm, const double cn, const int P, const double f, const double istar, const double beta, const double gamma, const double mu);
 
-    // Misc getter funcs
+    /** @returns the current time */
     double get_time() const;
 
+    /** @returns the number of susceptible normals, as a proportion of the total population */
     double get_sn() const;
+    /** @returns the number of susceptible morons, as a proportion of the total population */
     double get_sm() const;
+    /** @returns the number of infected normals, as a proportion of the total population */
     double get_in() const;
+    /** @returns the number of infected morons, as a proportion of the total population */
     double get_im() const;
+    /** @returns the number of recovered (or deceased) normals, as a proportion of the total population */
     double get_rn() const;
+    /** @returns the number of recovered (or deceased) morons, as a proportion of the total population */
     double get_rm() const;
 
-    // Simulates one iteration of the model, using the given time step
+    /** Simulates one iteration of the model, using the given time step */
     void step(const double dt);
 
 private:
@@ -27,7 +43,6 @@ private:
     // and the non-const member variables represent the current status of the population
     const int population_size;  // P
     const double proportion_of_morons;  // f
-    const double initial_num_infected;  // i*
 
     const int num_normals;  // N
     const int num_morons;  // M
