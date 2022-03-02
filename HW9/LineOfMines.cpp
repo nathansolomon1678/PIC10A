@@ -75,7 +75,13 @@ void LineOfMines::makeSelection(int position) {
     if (containsMine(position)) {
         hitMine = true;
         locationDisplays[position] = "__*__";
+        score = 0;
     } else {
         locationDisplays[position] = "__" + std::to_string(neighbouringMineCounts[position]) + "__";
+        ++score;
     }
+}
+
+int LineOfMines::getScore() const {
+    return score;
 }

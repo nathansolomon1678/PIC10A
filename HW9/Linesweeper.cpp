@@ -29,24 +29,35 @@ int main() {
     std::cin >> num_mines;
 
     Player User(name);
-    LineOfMines Minefield(length, num_mines);
     
-    while (true) {
-        Minefield.display();
-        std::cout << "What position would you like to reveal? ";
-        int position = 0;
-        std::cin >> position;
-        --position;  // Player thinks it starts counting at 1, but it actually starts at 0
-        Minefield.makeSelection(position);
-        Minefield.display();
-        if (Minefield.hasHitMine()) { break; }
-        std::cout << "Would you like to reveal another location? [y/n] ";
-        char continue_playing = ' ';
-        std::cin >> continue_playing;
-        if (continue_playing != 'y') { break; }
+    char play_another_round = 'y';
+    while (play_another_round == 'y') {
+        LineOfMines Minefield(length, num_mines);
+        while (true) {
+            Minefield.display();
+            std::cout << "What position would you like to reveal? ";
+            int position = 0;
+            std::cin >> position;
+            --position;  // Player thinks it starts counting at 1, but it actually starts at 0
+            Minefield.makeSelection(position);
+            Minefield.display();
+            if (Minefield.hasHitMine()) { break; }
+            std::cout << "Would you like to reveal another location? [y/n] ";
+            char reveal_another_location = ' ';
+            std::cin >> reveal_another_location;
+            if (reveal_another_location != 'y') { break; }
+        }
+        std::cout << "The mine positions are now revealed:\n";
+        Minefield.grandReveal();
+        if (User.checkRecord(Minefield.getScore())) {
+            std::cout << "You have a new high score of " << User.getMaxScore() << "!\n";
+        } else {
+            std::cout << "You scored " << Minefield.getScore() << " but your best score is still " << User.getMaxScore() << '\n';
+        }
+        std::cout << "Would you like to play another game? [y/n] ";
+        std::cin >> play_another_round;
     }
-    std::cout << "The mine positions are now revealed:\n";
-    Minefield.grandReveal();
+    std::cout << '\n' << User.getName() << ", your top score was " << User.getMaxScore() << ".\n";
 
 	return 0;
 }
