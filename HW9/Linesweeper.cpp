@@ -20,6 +20,8 @@ int main() {
     std::string name = "";
     std::getline(std::cin, name);
 
+    Player User(name);
+
     int length = 0;
     std::cout << "How long do you want the line? ";
     std::cin >> length;
@@ -27,8 +29,6 @@ int main() {
     int num_mines = 0;
     std::cout << "How many mines do you want on the line? ";
     std::cin >> num_mines;
-
-    Player User(name);
     
     char play_another_round = 'y';
     while (play_another_round == 'y') {

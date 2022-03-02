@@ -16,7 +16,13 @@ void LineOfMines::placeMines() {
     size_t mines_placed = 0;
     while (mines_placed < numberOfMines) {
         int new_mine_position = std::rand() % lineLength;
-        if (!containsMine(new_mine_position)) {
+        bool unique_position = true;
+        for (size_t i = 0; i < mines_placed; ++i) {
+            if (mineLocations[i] == new_mine_position) {
+                unique_position = false;
+            }
+        }
+        if (unique_position) {
             mineLocations[mines_placed] = new_mine_position;
             ++mines_placed;
         }
