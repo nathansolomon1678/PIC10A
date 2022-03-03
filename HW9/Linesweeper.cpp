@@ -32,31 +32,45 @@ int main() {
     
     char play_another_round = 'y';
     while (play_another_round == 'y') {
+        // Keep starting new games as long as user says 'y' when prompted whether to play another round
         LineOfMines Minefield(length, num_mines);
         while (true) {
+            // Keep asking to reveal a position until either the player chooses to stop,
+            // or they hit a mine
+            // (There are break statements for both of those cases, so this shouldn't be an infinite loop)
             Minefield.display();
+
             std::cout << "What position would you like to reveal? ";
             int position = 0;
             std::cin >> position;
-            --position;  // Player thinks it starts counting at 1, but it actually starts at 0
+            --position;  // Player thinks position numbers start at 1, but they actually start at 0
             Minefield.makeSelection(position);
             Minefield.display();
+
+            // If they hit a mine, round is over
             if (Minefield.hasHitMine()) { break; }
             std::cout << "Would you like to reveal another location? [y/n] ";
             char reveal_another_location = ' ';
             std::cin >> reveal_another_location;
+            // Round is also over if they say 'n' to that question
             if (reveal_another_location != 'y') { break; }
         }
+
         std::cout << "The mine positions are now revealed:\n";
         Minefield.grandReveal();
         if (User.checkRecord(Minefield.getScore())) {
+            // If their score is a new record, let them know!
             std::cout << "You have a new high score of " << User.getMaxScore() << "!\n";
         } else {
+            // Otherwise, display a disappointed message
             std::cout << "You scored " << Minefield.getScore() << " but your best score is still " << User.getMaxScore() << '\n';
         }
+        // Ask whether they want to play another game
+        // They can play as many games as they want if they just keep saying 'y'
         std::cout << "Would you like to play another game? [y/n] ";
         std::cin >> play_another_round;
     }
+
     std::cout << '\n' << User.getName() << ", your top score was " << User.getMaxScore() << ".\n";
 
 	return 0;
