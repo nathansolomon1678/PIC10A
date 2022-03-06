@@ -16,6 +16,9 @@ public:
     time_t getTime() const;
     int getGuesses() const;
 private:
+    // Using an std::set makes lookups take O(log n) time (since it implements
+    // a binary search tree), but choosing a random element of words will
+    // take O(n) time (which is fine since we only do it once)
     std::set<std::string> words;
     std::string chosen;
     int guesses;

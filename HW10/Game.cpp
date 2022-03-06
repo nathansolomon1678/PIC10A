@@ -8,6 +8,12 @@ int main() {
     std::cout << "Enter your name: ";
     std::string name("");
     std::getline(std::cin, name);
+    if (name == "Honesty" || name == "word4") {
+        // This would cause a mess, since it would interfere
+        // with existing .txt files
+        std::cout << "Your name is not \"" << name << "\", you liar.\n";
+        return 0;
+    }
 
     std::ifstream previous_scores(name + ".txt");
     if (previous_scores) {

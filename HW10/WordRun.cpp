@@ -55,6 +55,11 @@ void WordRun::guess(std::string guessed_word) {
         return;
     }
     
+    // This function matches the assignment spec, but doesn't match
+    // how Wordle actually works. For example, if the chosen word is "into"
+    // and the user guesses "book", this function would print "-~~-", but
+    // and actual game of Wordle would mark only the first 'o' as being in
+    // the chosen word, so this should output "-~--" in that case (but doesn't)
     std::string display("----\n");
     const int word_length = 4;
     for (int i = 0; i < word_length; ++i) {
